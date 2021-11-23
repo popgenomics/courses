@@ -1,0 +1,24 @@
+nSNPs=2000
+L=10000
+r=200
+
+# N1 = N2; old split
+msnsam 40 1 -s ${nSNPs} -r ${r} ${L} -I 2 20 20 0 -n 1 1 -n 2 1 -ej 2 1 2 > tmp.ms; python3 ms2fasta.py tmp.ms 10 10 > data_1.fasta
+
+# N1 = 10 N2; old split
+msnsam 40 1 -s ${nSNPs} -r ${r} ${L}  -I 2 20 20 0 -n 1 1 -n 2 0.1 -ej 2 1 2 > tmp.ms; python3 ms2fasta.py tmp.ms 10 10 > data_2.fasta
+
+# N1 = N2; old split; secondary contact
+msnsam 40 1 -s ${nSNPs} -r ${r} ${L}  -I 2 20 20 0 -n 1 1 -n 2 1 -m 1 2 0.1 -m 2 1 0.1 -eM 0.1 0 -ej 2 1 2 > tmp.ms; python3 ms2fasta.py tmp.ms 10 10 > data_3.fasta
+
+# N1 = N2; old split; secondary contact
+msnsam 40 1 -s ${nSNPs} -r ${r} ${L}  -I 2 20 20 0 -n 1 1 -n 2 1 -m 1 2 1 -m 2 1 1 -eM 0.1 0 -ej 2 1 2 > tmp.ms; python3 ms2fasta.py tmp.ms 10 10 > data_4.fasta
+
+# N1 = N2; old split; secondary contact
+msnsam 40 1 -s ${nSNPs} -r ${r} ${L}  -I 2 20 20 0 -n 1 1 -n 2 1 -m 1 2 10 -m 2 1 10 -eM 0.1 0 -ej 2 1 2 > tmp.ms; python3 ms2fasta.py tmp.ms 10 10 > data_5.fasta
+
+# N1 = N2; old split; subdivisions within species
+msnsam 40 1 -s ${nSNPs} -r ${r} ${L}  -I 4 10 10 10 10 0 -ej 1 2 1 -ej 2 4 3 -ej 4 3 1 > tmp.ms; python3 ms2fasta.py tmp.ms 10 10 > data_6.fasta
+
+# N1 = N2; old split; subdivisions with secondary contact between 2 and 3
+msnsam 40 1 -s ${nSNPs} -r ${r} ${L}  -I 4 10 10 10 10 0 -m 2 3 1 -m 3 2 1 -eM 0.2 0 -ej 1 2 1 -ej 2 4 3 -ej 4 3 1 > tmp.ms; python3 ms2fasta.py tmp.ms 10 10 > data_7.fasta
